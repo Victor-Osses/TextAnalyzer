@@ -4,7 +4,6 @@
  */
 package Controller;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.TreeMap;
 
 /**
@@ -17,36 +16,44 @@ import java.util.TreeMap;
 
 public class TextManipulator {
   
-    public ArrayList<TreeMap<String, ArrayList<String>>> textAnalyzer(ArrayList<ArrayList<String>> filesTextLines) {
-        ArrayList<TreeMap<String, ArrayList<String>>> wordCorrelation = new  ArrayList<>();
-       
-         for(ArrayList<String> text : filesTextLines) {
-            TreeMap<String, ArrayList<String>> tree = new TreeMap<>();
-            
-            for(String line : text) {
-                String[] words = line.trim().split(" ");
- 
+    public ArrayList<TreeMap<String, ArrayList<String>>> textAnalyzer(ArrayList<String> filesText) {
+        try {
+            ArrayList<TreeMap<String, ArrayList<String>>> wordsCorrelation = new  ArrayList<>();
+
+             for(String text : filesText) {
+                TreeMap<String, ArrayList<String>> treeMap = new TreeMap<>();
+                text = normalizeText(text);
+
+                String[] words = text.trim().split(" ");
+
                 for(int index = 0; index < words.length - 1; index++) {
-                   if(!tree.containsKey(words[index])) {
-                        tree.put(words[index], new ArrayList<>());
+                   String key = words[index];
+                   String value = words[index + 1];
+
+                   if(!treeMap.containsKey(key)) {
+                        treeMap.put(key, new ArrayList<>());
                     }
-                    
-                   if(!tree.get(words[index]).contains(words[index + 1]))
-                        tree.get(words[index]).add(words[index + 1]);
+
+                   if(!treeMap.get(key).contains(value))
+                        treeMap.get(key).add(value);
                 }
-                
-               if(tree.size() > 0)
-                    wordCorrelation.add(tree);
+
+                wordsCorrelation.add(treeMap);
             }
+            return wordsCorrelation;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        
-        return wordCorrelation;
+       
+        return null;
     }
    
-    
-    /*Tirar acentos, pontuação, travessão etc*/
-    public String textRegex(String text) {
-        return "texto formatado";
+    public String normalizeText(String text) {
+        text = text.toLowerCase();
+        String[] normalizeChars = {".", ",",":",";","!","?","(",")","[","]","{","}","\"","\'","\\", "/"};
+        for(String normalizeChar : normalizeChars) {
+            text = text.replace(normalizeChar, "");
+        }
+        return text;
     }
-
 }
