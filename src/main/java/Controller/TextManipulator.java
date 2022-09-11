@@ -21,19 +21,22 @@ public class TextManipulator {
         ArrayList<TreeMap<String, ArrayList<String>>> wordCorrelation = new  ArrayList<>();
        
          for(ArrayList<String> text : filesTextLines) {
-       
+            TreeMap<String, ArrayList<String>> tree = new TreeMap<>();
+            
             for(String line : text) {
                 String[] words = line.trim().split(" ");
-                TreeMap<String, ArrayList<String>> tree = new TreeMap<>();
-                
+ 
                 for(int index = 0; index < words.length - 1; index++) {
                    if(!tree.containsKey(words[index])) {
                         tree.put(words[index], new ArrayList<>());
                     }
-                   
-                    tree.get(words[index]).add(words[index + 1]);
+                    
+                   if(!tree.get(words[index]).contains(words[index + 1]))
+                        tree.get(words[index]).add(words[index + 1]);
                 }
-               wordCorrelation.add(tree);
+                
+               if(tree.size() > 0)
+                    wordCorrelation.add(tree);
             }
         }
         
