@@ -26,16 +26,27 @@ public class Controller {
     public List<String> scanFilesName() {
          return getFileM().scanFileNames();
     }
-//   
+
     public ArrayList<File> getFiles(List fileNames) {
        return getFileM().getFiles(fileNames);
     }
     
-    public ArrayList<ArrayList<String>> getFilesTextLines (ArrayList<File> files) {
-        return getFileM().getFilesTextLines(files);
+    public ArrayList<String> getFilesText (ArrayList<File> files) {
+        return getFileM().getFilesText(files);
+    }
+
+    public void createFiles (ArrayList<TreeMap<String, ArrayList<String>>>  wordsCorrelation) {
+        for(int index = 0; index < wordsCorrelation.size(); index++) {
+              FileManipulator fileM = getFileM();
+              File file = fileM.createFiles(index + 1);
+              
+              if(file.isFile()) {
+                fileM.writeToFile(wordsCorrelation.get(index), file);
+              } 
+        }
     }
     
-    public ArrayList<TreeMap<String, ArrayList<String>>> textAnalyzer(ArrayList<ArrayList<String>> filesTexts) {
+    public ArrayList<TreeMap<String, ArrayList<String>>> textAnalyzer(ArrayList<String> filesTexts) {
          return getTextM().textAnalyzer(filesTexts);
     }
 
