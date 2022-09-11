@@ -20,29 +20,17 @@ import java.util.TreeMap;
  * @autor Jorge Yudi Saito Maruyama, 254274
  */
 public class Main {
-
     public static void main(String[] args) {
         try {
             Controller cont = new Controller();
             List fileNames = cont.scanFilesName();
             ArrayList<File> files = cont.getFiles(fileNames);
-            ArrayList<ArrayList<String>> filesTexts = cont.getFilesTextLines(files);
-            System.out.println(cont.textAnalyzer(filesTexts));
-            
-           /* ArrayList<TreeMap<String, ArrayList<String>>> wordCorrelation = new  ArrayList<>();
-            TreeMap<String, ArrayList<String>> tree = new TreeMap<>();
-            
-            if(!tree.containsKey("a")) {
-                tree.put("a", new ArrayList<>());
-            }
-            
-            tree.get("a").add("texto");
-            tree.get("a").add("texto2");
-            tree.put("a", tree.get("a"));
-            wordCorrelation.add(tree);
-            System.out.println(wordCorrelation);*/
+            ArrayList<String> filesTexts = cont.getFilesText(files);
+            ArrayList<TreeMap<String, ArrayList<String>>> wordsCorrelation = cont.textAnalyzer(filesTexts);
+            System.out.println(wordsCorrelation);
+            cont.createFiles(wordsCorrelation);       
         } catch(Exception e) {
             System.out.println("a" + e.getMessage());
-        }
+        } 
     }
 }
