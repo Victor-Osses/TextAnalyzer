@@ -4,9 +4,10 @@
  */
 package Controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.TreeMap;
 
 /**
  *
@@ -17,34 +18,32 @@ import java.util.Scanner;
  */
 
 public class Controller {
- 
+    private final FileManipulator fileM = new FileManipulator();
+    private final TextManipulator textM = new TextManipulator();
+    
     public Controller() {}
 
-    public List<String> scanFileNames() {
-        List<String> fileNames = new ArrayList();
-        System.out.println("Informe os nomes dos arquivos (não informe nada para parar)");
-        
-        try {
-            while(true) {
-                Scanner scan = new Scanner(System.in);
-                String str = scan.nextLine();
-
-                if(!str.equals("")) {
-                    fileNames.add(str); 
-                } else {
-                    break;
-                }
-        
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return fileNames;
+    public List<String> scanFilesName() {
+         return getFileM().scanFileNames();
     }
-   
-    public void getFileManipulator(List fileNames) {
-        TextManipulator fileM = new TextManipulator(fileNames);
-        fileM.getFiles();
+//   
+    public ArrayList<File> getFiles(List fileNames) {
+       return getFileM().getFiles(fileNames);
     }
+    
+    public ArrayList<ArrayList<String>> getFilesTextLines (ArrayList<File> files) {
+        return getFileM().getFilesTextLines(files);
+    }
+    
+    public ArrayList<TreeMap<String, ArrayList<String>>> textAnalyzer(ArrayList<ArrayList<String>> filesTexts) {
+         return getTextM().textAnalyzer(filesTexts);
+    }
+
+    public TextManipulator getTextM() {
+        return textM;
+    }
+    
+    public FileManipulator getFileM() {
+        return fileM;
+    }  
 }
