@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import java.io.File;
@@ -14,12 +10,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-/**
- * @author Victor Hugo Costa Osses, 254373
- * @author Pedro Trama Fernandes Pereira, 254344
- * @author Luis Francisco Ribeiro Malaquias, 254289
- * @author Jorge Yudi Saito Maruyama, 254274
- */
 public class FileManipulator {
     
     public FileManipulator() {}
@@ -71,8 +61,11 @@ public class FileManipulator {
                 Scanner scan = new Scanner(files.get(index));
                 
                 while (scan.hasNextLine()) {
-                    String line = scan.nextLine().replace("\n", "") + " ";
-                    fileLines += line;
+                    String line = scan.nextLine();
+                    if(!line.equals("")) {
+                        line = line.replace("\n", "") + " ";
+                        fileLines += line;
+                    }
                 }
                 
                 fileTexts.add(fileLines);

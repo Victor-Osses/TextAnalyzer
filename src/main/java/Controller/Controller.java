@@ -1,21 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
-
-/**
- *
- * @author Victor Hugo Costa Osses, 254373
- * @author Pedro Trama Fernandes Pereira, 254344
- * @author Luis Francisco Ribeiro Malaquias, 254289
- * @author Jorge Yudi Saito Maruyama, 254274
- */
 
 public class Controller {
     private final FileManipulator fileM = new FileManipulator();
