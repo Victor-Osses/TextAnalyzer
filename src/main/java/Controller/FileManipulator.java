@@ -85,16 +85,16 @@ public class FileManipulator {
   
       public void writeToFile(TreeMap<String, ArrayList<String>> text, File file) {
             try {
-                FileWriter myWriter = new FileWriter(file.getName());
+                FileWriter fw = new FileWriter(file.getName());
                 for(Map.Entry<String, ArrayList<String>> entry : text.entrySet()) {
                     String line = "";
                     for(String word : entry.getValue()) {
                         line += word + " ";
                     }
                     
-                   myWriter.write(entry.getKey() + " " + line + "\n");
+                   fw.write(entry.getKey() + " " + line.trim() + "\n");
                 }
-                myWriter.close();
+                fw.close();
               } 
               catch (IOException e) {
                   System.out.println("Error");
@@ -105,7 +105,7 @@ public class FileManipulator {
       
       public File createFiles(int index) {
             try {
-                 File file = new File("Texto0" + index + ".txt");
+                 File file = new File("Texto0" + index + ".csv");
                  
                  if (!file.createNewFile()) {
                      System.out.println("File not created");

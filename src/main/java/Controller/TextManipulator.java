@@ -1,6 +1,8 @@
 package Controller;
 import java.util.ArrayList;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TextManipulator {
   
@@ -18,7 +20,7 @@ public class TextManipulator {
                    String key = words[index];
                    String value = words[index + 1];
 
-                   if(!treeMap.containsKey(key)) {
+                    if(!treeMap.containsKey(key)) {
                         treeMap.put(key, new ArrayList<>());
                     }
 
